@@ -1,16 +1,21 @@
-import Movies from '../Movies/Movies';
-import SavedMovies from '../SavedMovies/SavedMovies';
-import Profile from '../Profile/Profile';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-// import { Route, Switch, useHistory } from "react-router-dom";
+import "./App.css";
+import Movies from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
+import Profile from "../Profile/Profile";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import Main from "../Main/Main";
+import { Route, Switch, useHistory } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <Header />
-      <Footer />
-      {/* <Switch>
+      <Switch>
+        <Route path="/" exact>
+          <Header />
+          <Main />
+          <Footer />
+        </Route>
         <Route path="/signin">
           <></>
         </Route>
@@ -18,15 +23,16 @@ function App() {
           <></>
         </Route>
         <Route path="/movies">
-          <Movies/>
+          <Movies />
         </Route>
         <Route path="/saved-movies">
-          <SavedMovies/>
+          <SavedMovies />
         </Route>
         <Route path="/profile">
-          <Profile/>
+          <Profile />
         </Route>
-      </Switch> */}
+        <Route path="*">{/* <NoMatch /> */}</Route>
+      </Switch>
     </>
   );
 }

@@ -1,0 +1,158 @@
+.about-project {
+  max-width: 1280px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 111px 70px 110px;
+}
+
+@media screen and (max-width: 800px) {
+  .about-project {
+    padding: 91px 50px 90px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .about-project {
+    padding: 70px 18px;
+  }
+}
+
+.about-project__title {
+  margin: 0 0 70px;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 26.63px;
+  letter-spacing: -1px;
+  padding: 0 0 22px;
+  border-bottom: 1px solid black;
+}
+@media screen and (max-width: 500px) {
+  .about-project__title {
+    font-size: 18px;
+    line-height: 21.8px;
+    padding: 0 0 28px;
+    margin: 0 0 61px;
+  }
+}
+
+.about-project__description-container {
+  display: grid;
+  grid-template-columns: calc(50% - 20px) calc(50% - 20px);
+  column-gap: 40px;
+  margin-bottom: 111px;
+}
+
+@media screen and (max-width: 800px) {
+  .about-project__description-container {
+    column-gap: 35px;
+    margin-bottom: 93px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .about-project__description-container {
+    grid-template-columns: 100%;
+    margin-bottom: 60px;
+    row-gap: 56px;
+  }
+}
+
+.about-project__subtitle {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24.2px;
+  letter-spacing: -0.8px;
+  margin: 0 0 26px;
+  padding: 0;
+}
+
+@media screen and (max-width: 800px) {
+  .about-project__subtitle {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .about-project__subtitle {
+    font-size: 18px;
+    line-height: 21.8px;
+    margin-bottom: 16px;
+  }
+}
+
+.about-project__text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+}
+
+@media screen and (max-width: 800px) {
+  .about-project__text {
+    line-height: 19px;
+    letter-spacing: -1.1px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .about-project__text {
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 0;
+  }
+}
+
+.about-project__diagram-container {
+  display: grid;
+  grid-template-columns: minmax(100px, 20%) 80%;
+}
+
+@media screen and (max-width: 800px) {
+  .about-project__diagram-container {
+    grid-template-columns: minmax(100px, 21%) 79%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .about-project__diagram-container {
+    grid-template-columns: 100px 184px;
+  }
+}
+
+.about-project__diagram-line {
+  text-align: center;
+  height: 35px;
+  line-height: 35px;
+  font-size: 14px;
+}
+
+@media screen and (max-width: 500px) {
+  .about-project__diagram-line {
+    font-size: 11px;
+  }
+}
+
+.about-project__diagram-line_black {
+  background-color: black;
+  color: white;
+}
+
+.about-project__diagram-line_gray {
+  background-color: #f2f2f2;
+}
+
+.about-project__diagram-description {
+  text-align: center;
+  color: #a0a0a0;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 14px 0 0;
+}
+
+@media screen and (max-width: 500px) {
+  .about-project__diagram-description {
+    font-size: 11px;
+    line-height: 13px;
+    margin: 9px 0 0;
+  }
+}
