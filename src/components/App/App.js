@@ -6,13 +6,25 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import { Route, Switch, useHistory } from "react-router-dom";
+import links from "../../data/links";
+import PopupMenu from "../PopupMenu/PopupMenu";
+import NoMatch from "../NoMatch/NoMatch";
+import { useState } from "react";
 
 function App() {
+  const [isPopupMenuOpen, setIsPopupMenuOpen] = useState(false);
+  function onOpenMenu () {
+    setIsPopupMenuOpen(true)
+  }
+  function onCloseMenu () {
+    setIsPopupMenuOpen(false)
+  }
   return (
     <>
+      <PopupMenu links={links} onCloseMenu={onCloseMenu} isPopupMenuOpen={isPopupMenuOpen} />
       <Switch>
         <Route path="/" exact>
-          <Header />
+          <Header colorHeader={"pink"} isLoggedIn={false} />
           <Main />
           <Footer />
         </Route>
@@ -23,15 +35,21 @@ function App() {
           <></>
         </Route>
         <Route path="/movies">
+          <Header colorHeader={"white"} links={links} isLoggedIn={true} onOpenMenu={onOpenMenu} />
           <Movies />
+          <Footer />
         </Route>
         <Route path="/saved-movies">
+          <Header colorHeader={"white"} links={links} isLoggedIn={true} onOpenMenu={onOpenMenu} />
           <SavedMovies />
+          <Footer />
         </Route>
         <Route path="/profile">
           <Profile />
         </Route>
-        <Route path="*">{/* <NoMatch /> */}</Route>
+        <Route path="*">
+          <NoMatch />
+        </Route>
       </Switch>
     </>
   );
