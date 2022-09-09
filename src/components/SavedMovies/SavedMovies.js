@@ -1,7 +1,7 @@
 function SavedMovies() {
     return (
-      <>
-      </>
+      <main>
+      </main>
     );
   }
   
