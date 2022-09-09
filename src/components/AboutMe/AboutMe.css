@@ -38,8 +38,14 @@
 
 .aboutme__general-container {
   display: grid;
-  grid-template-columns: minmax(150px, 600px) minmax(100px, 255px);
+  grid-template-columns: minmax(150px, 600px) auto;
   gap: 49px;
+}
+
+@media screen and (max-width: 800px) {
+  .aboutme__general-container {
+    grid-template-columns: minmax(150px, 600px) minmax(100px, 255px);
+  }
 }
 
 @media screen and (max-width: 500px) {
