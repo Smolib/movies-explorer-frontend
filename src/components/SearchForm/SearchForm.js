@@ -1,4 +1,6 @@
 import "./SearchForm.css";
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox'
+
 function SearchForm() {
   return (
     <section className="search">
@@ -20,13 +22,7 @@ function SearchForm() {
             </button>
           </form>
         </div>
-        <div className="search__checkbox-container">
-          <label className="search__check-switch">
-            <input type="checkbox" />
-            <span className="search__check-slider"></span>
-            <span className="search__check-name">Короткометражки</span>
-          </label>
-        </div>
+        <FilterCheckbox/>
       </div>
     </section>
   );
