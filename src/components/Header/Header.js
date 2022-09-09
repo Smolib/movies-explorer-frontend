@@ -15,7 +15,7 @@ function Header({ colorHeader, links, isLoggedIn, onOpenMenu }) {
               <ul className="header__navlist">
                 {links.map((item, i) => (
                   <li key={i}>
-                    <NavLink  to={item.link} className="header__link">
+                    <NavLink to={item.link} className="header__link">
                       {item.name}
                     </NavLink>
                   </li>
@@ -23,14 +23,24 @@ function Header({ colorHeader, links, isLoggedIn, onOpenMenu }) {
               </ul>
             </nav>
             <div>
-              <button className="header__account-button">Аккаунт</button>
-              <button className="header__menu-button" onClick={onOpenMenu}></button>
+              <button type="button" className="header__account-button">
+                Аккаунт
+              </button>
+              <button
+                type="button"
+                className="header__menu-button"
+                onClick={onOpenMenu}
+              ></button>
             </div>
           </>
         ) : (
           <div>
-            <button className="header__signup-button">Регистрация</button>
-            <button className="header__login-button">Войти</button>
+            <button type="button" className="header__signup-button">
+              Регистрация
+            </button>
+            <button type="button" className="header__login-button">
+              Войти
+            </button>
           </div>
         )}
       </div>

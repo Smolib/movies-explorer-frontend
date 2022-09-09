@@ -22,3 +22,47 @@
     gap: 7px;
   }
 }
+
+.movies-list__more-container {
+  grid-column-start: 1;
+  grid-column-end: -1;
+  padding: 25px 0 70px;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 800px) {
+  .movies-list__more-container {
+    padding: 47px 0 68px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .movies-list__more-container {
+    padding: 70px 0 68px;
+  }
+}
+
+.movies-list__more-button {
+  max-width: 320px;
+  width: 100%;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  padding: 9px 0 11px;
+  background-color: inherit;
+  border: 1px solid #E8E8E8;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.movies-list__more-button:hover,
+.movies-list__more-button:focus {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 500px) {
+  .movies-list__more-button {
+    max-width: 240px;
+  }
+}

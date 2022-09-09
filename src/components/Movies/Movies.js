@@ -5,7 +5,7 @@ function Movies() {
   return (
     <main>
       <SearchForm />
-      <MoviesCardList />
+      <MoviesCardList needMoreButton={true} />
     </main>
   );
 }

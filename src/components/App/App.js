@@ -7,21 +7,25 @@ import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import { Route, Switch, useHistory } from "react-router-dom";
 import links from "../../data/links";
-import PopupMenu from "../PopupMenu/PopupMenu";
+import Navigation from "../Navigation/Navigation";
 import NoMatch from "../NoMatch/NoMatch";
 import { useState } from "react";
 
 function App() {
   const [isPopupMenuOpen, setIsPopupMenuOpen] = useState(false);
-  function onOpenMenu () {
-    setIsPopupMenuOpen(true)
+  function onOpenMenu() {
+    setIsPopupMenuOpen(true);
   }
-  function onCloseMenu () {
-    setIsPopupMenuOpen(false)
+  function onCloseMenu() {
+    setIsPopupMenuOpen(false);
   }
   return (
     <>
-      <PopupMenu links={links} onCloseMenu={onCloseMenu} isPopupMenuOpen={isPopupMenuOpen} />
+      <Navigation
+        links={links}
+        onCloseMenu={onCloseMenu}
+        isPopupMenuOpen={isPopupMenuOpen}
+      />
       <Switch>
         <Route path="/" exact>
           <Header colorHeader={"pink"} isLoggedIn={false} />
@@ -35,12 +39,22 @@ function App() {
           <></>
         </Route>
         <Route path="/movies">
-          <Header colorHeader={"white"} links={links} isLoggedIn={true} onOpenMenu={onOpenMenu} />
+          <Header
+            colorHeader={"white"}
+            links={links}
+            isLoggedIn={true}
+            onOpenMenu={onOpenMenu}
+          />
           <Movies />
           <Footer />
         </Route>
         <Route path="/saved-movies">
-          <Header colorHeader={"white"} links={links} isLoggedIn={true} onOpenMenu={onOpenMenu} />
+          <Header
+            colorHeader={"white"}
+            links={links}
+            isLoggedIn={true}
+            onOpenMenu={onOpenMenu}
+          />
           <SavedMovies />
           <Footer />
         </Route>
