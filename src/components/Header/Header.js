@@ -23,9 +23,11 @@ function Header({ colorHeader, links, isLoggedIn, onOpenMenu }) {
               </ul>
             </nav>
             <div>
-              <button type="button" className="header__account-button">
-                Аккаунт
-              </button>
+              <NavLink to="/profile">
+                <button type="button" className="header__account-button">
+                  Аккаунт
+                </button>
+              </NavLink>
               <button
                 type="button"
                 className="header__menu-button"
@@ -35,12 +37,16 @@ function Header({ colorHeader, links, isLoggedIn, onOpenMenu }) {
           </>
         ) : (
           <div>
-            <button type="button" className="header__signup-button">
-              Регистрация
-            </button>
-            <button type="button" className="header__login-button">
-              Войти
-            </button>
+            <NavLink to="/signin">
+              <button type="button" className="header__signup-button">
+                Регистрация
+              </button>
+            </NavLink>
+            <NavLink to="/signup">
+              <button type="button" className="header__login-button">
+                Войти
+              </button>
+            </NavLink>
           </div>
         )}
       </div>

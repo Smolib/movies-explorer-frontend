@@ -3,11 +3,13 @@ import MovieCard from "../MoviesCard/MoviesCard";
 import image1 from "../../images/movies/movie1.jpg";
 import image2 from "../../images/movies/movie2.jpg";
 import image3 from "../../images/movies/movie3.jpg";
+import Preloader from "../Preloader/Preloader";
 
 function MoviesCardList({ needMoreButton }) {
   return (
     <>
       <section className="movies-list">
+        {/* <Preloader /> */}
         <MovieCard
           title="В погоне за Бенкси"
           time="27 минут"

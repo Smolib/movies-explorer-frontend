@@ -5,11 +5,13 @@ import Profile from "../Profile/Profile";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import links from "../../data/links";
 import Navigation from "../Navigation/Navigation";
 import NoMatch from "../NoMatch/NoMatch";
 import { useState } from "react";
+import Register from "../Register/Register";
+import Login from "../Login/Login";
 
 function App() {
   const [isPopupMenuOpen, setIsPopupMenuOpen] = useState(false);
@@ -33,10 +35,10 @@ function App() {
           <Footer />
         </Route>
         <Route path="/signin">
-          <></>
+          <Register/>
         </Route>
         <Route path="/signup">
-          <></>
+          <Login/>
         </Route>
         <Route path="/movies">
           <Header
@@ -59,7 +61,13 @@ function App() {
           <Footer />
         </Route>
         <Route path="/profile">
-          <Profile />
+          <Header
+            colorHeader={"white"}
+            links={links}
+            isLoggedIn={true}
+            onOpenMenu={onOpenMenu}
+          />
+          <Profile name="Виталий" email="pochta@yandex.ru"/>
         </Route>
         <Route path="*">
           <NoMatch />
