@@ -70,6 +70,8 @@
 }
 
 .movie-card__button_type_save {
+  background-color: #f9f9f9;
+  border-radius: 30px;
 }
 
 .movie-card__button_type_saved {

@@ -138,6 +138,7 @@
   font-size: 13px;
   line-height: 16px;
   letter-spacing: 0.2px;
+  cursor: pointer;
 }
 
 .profile__edit-button:hover {
@@ -159,6 +160,7 @@
   color: red;
   margin-top: 14px;
   letter-spacing: 0.2px;
+  cursor: pointer;
 }
 .profile__exit-button:hover {
   opacity: 0.7;

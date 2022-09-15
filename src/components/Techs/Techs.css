@@ -18,6 +18,7 @@
 @media screen and (max-width: 500px) {
   .techs__wrapper {
     padding: 70px 18px;
+    background-color: white;
   }
 }
 
