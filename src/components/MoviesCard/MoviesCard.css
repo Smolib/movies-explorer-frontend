@@ -1,0 +1,113 @@
+.movie-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  background: #fdfdfd;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  padding: 18px 0;
+}
+
+.movie-card__name {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  margin: 0 0 0 18px;
+}
+
+@media screen and (max-width: 500px) {
+  .movie-card__name {
+    font-size: 12px;
+    line-height: 18px;
+    margin-left: 14px;
+  }
+}
+
+.movie-card__time {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  color: #a0a0a0;
+  margin-right: 18px;
+}
+
+@media screen and (max-width: 500px) {
+  .movie-card__time {
+    font-size: 10px;
+    line-height: 18px;
+  }
+}
+
+.movie-card__image {
+  grid-column: span 2;
+  max-width: 360px;
+  width: 100%;
+  max-height: 200px;
+  margin: 18px auto;
+}
+
+@media screen and (max-width: 500px) {
+  .movie-card__image {
+    margin: 15px auto;
+  }
+}
+
+.movie-card__button {
+  grid-column: span 2;
+  width: 100px;
+  height: 29px;
+  margin: auto;
+  cursor: pointer;
+  border: 0;
+  background-color: inherit;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 11px;
+}
+
+.movie-card__button:hover,
+.movie-card__button:focus {
+  opacity: 0.7;
+}
+
+.movie-card__button_type_save {
+  background-color: #f9f9f9;
+  border-radius: 30px;
+}
+
+.movie-card__button_type_saved {
+  background-color: #ff4062;
+  border-radius: 30px;
+  position: relative;
+}
+
+.movie-card__button_type_saved::before {
+  content: "";
+  background-image: url("../../images/ok.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-7px) translateY(-3px);
+  width: 10px;
+  height: 15px;
+  position: absolute;
+}
+
+.movie-card__button_type_delete {
+  background-color: #f9f9f9;
+  border-radius: 30px;
+  position: relative;
+}
+
+.movie-card__button_type_delete::before {
+  content: "";
+  background-image: url("../../images/delete.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-7px) translateY(-3px);
+  width: 10px;
+  height: 15px;
+  position: absolute;
+}

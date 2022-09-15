@@ -1,0 +1,13 @@
+@import url(./vendor/fonts/inter/inter.css);
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", Woff, Arial, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}

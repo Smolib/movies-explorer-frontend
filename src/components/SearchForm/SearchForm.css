@@ -1,0 +1,125 @@
+.search {
+  max-width: 1280px;
+  margin: auto;
+  padding: 65px 70px 80px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.search::before {
+  content: "";
+  height: 1px;
+  width: 100%;
+  max-width: calc(100% - 140px);
+  background-color: #e8e8e8;
+  bottom: 10px;
+  position: absolute;
+}
+
+@media screen and (max-width: 800px) {
+  .search {
+    padding: 75px 30px 120px;
+  }
+  .search::before {
+    max-width: calc(100% - 60px);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .search {
+    padding: 75px 10px 55px;
+  }
+  .search::before {
+    max-width: calc(100% - 20px);
+  }
+}
+
+.search__wrapper {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+@media screen and (max-width: 500px) {
+  .search__wrapper {
+    grid-template-columns: auto;
+  }
+}
+
+.search__search-container {
+  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  border-radius: 9px 0 0 9px;
+  min-height: 72px;
+  padding: 0 30px 0 19px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  .search__search-container {
+    padding: 0 20px 0 19px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .search__search-container {
+    border-radius: 9px;
+    margin-bottom: 45px;
+    padding: 0 18px 0 8px;
+  }
+}
+
+.search__icon {
+  background-image: url(../../images/search.svg);
+  width: 34px;
+  height: 34px;
+}
+
+@media screen and (max-width: 500px) {
+  .search__icon {
+    display: none;
+  }
+}
+
+.search__form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  width: 100%;
+}
+
+.search__input {
+  background-color: #f9f9f9;
+  outline: none;
+  border: 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  padding-left: 10px;
+  width: 100%;
+}
+
+@media screen and (max-width: 500px) {
+  .search__input {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+.search__submit {
+  background-color: black;
+  border: 0;
+  border-radius: 48px;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 18px;
+  color: white;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.search__submit:hover,
+.search__submit:focus {
+  opacity: 0.7;
+}
