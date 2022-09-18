@@ -2,7 +2,6 @@ class MoviesApi {
   constructor({ baseUrl, headers, credentials }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
-    this._creditials = credentials;
   }
 
   _checkResponse(res) {
@@ -15,7 +14,6 @@ class MoviesApi {
   getMovies() {
     return fetch(`${this._baseUrl}/movies`, {
       headers: this._headers,
-      credentials: this._credentials,
     })
       .then(this._checkResponse)
       .then((result) => {
@@ -25,11 +23,10 @@ class MoviesApi {
 }
 
 const moviesApi = new MoviesApi({
-  baseUrl: "https://api.diploma.smolib.nomoredomains.sbs/",
+  baseUrl: "https://api.nomoreparties.co/beatfilm-movies",
   headers: {
     "Content-Type": "application/json",
   },
-  credentials: "include",
 });
 
 export { moviesApi };
