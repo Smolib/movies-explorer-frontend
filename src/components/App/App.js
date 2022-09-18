@@ -12,8 +12,10 @@ import NoMatch from "../NoMatch/NoMatch";
 import { useState } from "react";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState({});
   const [isPopupMenuOpen, setIsPopupMenuOpen] = useState(false);
   function onOpenMenu() {
     setIsPopupMenuOpen(true);
@@ -22,7 +24,7 @@ function App() {
     setIsPopupMenuOpen(false);
   }
   return (
-    <>
+    <CurrentUserContext.Provider value={currentUser}>
       <Navigation
         links={links}
         onCloseMenu={onCloseMenu}
@@ -35,10 +37,10 @@ function App() {
           <Footer />
         </Route>
         <Route path="/signin">
-          <Register/>
+          <Register />
         </Route>
         <Route path="/signup">
-          <Login/>
+          <Login />
         </Route>
         <Route path="/movies">
           <Header
@@ -67,13 +69,13 @@ function App() {
             isLoggedIn={true}
             onOpenMenu={onOpenMenu}
           />
-          <Profile name="Виталий" email="pochta@yandex.ru"/>
+          <Profile name="Виталий" email="pochta@yandex.ru" />
         </Route>
         <Route path="*">
           <NoMatch />
         </Route>
       </Switch>
-    </>
+    </CurrentUserContext.Provider>
   );
 }
 
