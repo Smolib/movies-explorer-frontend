@@ -71,6 +71,7 @@ class MainApi{
 
   getSavedMovies() {
     return fetch(`${this._baseUrl}/movies`, {
+      method: "GET",
       headers: this._headers,
       credentials: this._credentials,
     })

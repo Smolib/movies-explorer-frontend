@@ -9,7 +9,7 @@ import { Route, Switch } from "react-router-dom";
 import links from "../../data/links";
 import Navigation from "../Navigation/Navigation";
 import NoMatch from "../NoMatch/NoMatch";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -32,7 +32,8 @@ function App() {
       />
       <Switch>
         <Route path="/" exact>
-          <Header colorHeader={"pink"} isLoggedIn={false} />
+          <Header colorHeader={"pink"}
+            links={links} isLoggedIn={true} onOpenMenu={onOpenMenu} />
           <Main />
           <Footer />
         </Route>
@@ -49,7 +50,7 @@ function App() {
             isLoggedIn={true}
             onOpenMenu={onOpenMenu}
           />
-          <Movies />
+          <Movies/>
           <Footer />
         </Route>
         <Route path="/saved-movies">

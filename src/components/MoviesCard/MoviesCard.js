@@ -1,18 +1,18 @@
 import "./MoviesCard.css";
 
-function MoviesCard({ title, time, image, nameOfButton, textOfButton }) {
+function MoviesCard({ title, time, imageUrl, nameOfButton, textOfButton }) {
   return (
-    <arcticle className="movie-card">
+    <article className="movie-card">
       <h2 className="movie-card__name">{title}</h2>
       <span className="movie-card__time">{time}</span>
-      <img className="movie-card__image" src={image} alt={title} />
+      <img className="movie-card__image" src={`https://api.nomoreparties.co${imageUrl}`} alt={title} />
       <button
         type="button"
         className={`movie-card__button movie-card__button_type_${nameOfButton}`}
       >
         {textOfButton ? textOfButton : ""}
       </button>
-    </arcticle>
+    </article>
   );
 }
 
