@@ -15,13 +15,6 @@ function Movies() {
   const [isFirstSearch, setIsFirstSearch] = useState(true);
 
   useEffect(() => {
-    moviesApi.getMovies().then((data) => {
-      setAllMovies(data);
-      setIsMoviesLoaded(true);
-    });
-  }, []);
-
-  useEffect(() => {
     if (!isFirstSearch) {
       setMovies(searchMovies(allMovies, valueOfSearch));
     }
@@ -29,7 +22,13 @@ function Movies() {
 
   function handleSubmitSearch(keyWord) {
     setIsFirstSearch(false);
-    setValueOfSearch({ ...valueOfSearch, keyWord: keyWord });
+    moviesApi
+      .getMovies()
+      .then((data) => {
+        setAllMovies(data);
+        setIsMoviesLoaded(true);
+      })
+      .then(() => setValueOfSearch({ ...valueOfSearch, keyWord: keyWord }));
   }
 
   function handleCheckbox() {
@@ -45,6 +44,7 @@ function Movies() {
       <MoviesCardList
         movies={movies}
         isMoviesLoaded={isMoviesLoaded}
+        isFirstSearch={isFirstSearch}
         needMoreButton={true}
       />
     </main>
