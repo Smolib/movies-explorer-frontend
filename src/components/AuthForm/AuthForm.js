@@ -1,6 +1,7 @@
 import "./AuthForm.css";
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
+import { useState } from "react";
 
 function AuthForm({
   title,
@@ -9,19 +10,45 @@ function AuthForm({
   textBottom,
   linkBottom,
   linkText,
+  onSubmit,
 }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleOnSubmit(e) {
+    e.preventDefault();
+    const data = {
+      name,
+      email,
+      password,
+    };
+    onSubmit(data);
+  }
+
+  function handleOnChangeInputName(e) {
+    setName(e.target.value);
+  }
+  function handleOnChangeInputEmail(e) {
+    setEmail(e.target.value);
+  }
+  function handleOnChangeInputPassword(e) {
+    setPassword(e.target.value);
+  }
   return (
     <section className="authform">
       <Link to="/">
         <img className="authform__logo" src={logo} alt="Лого" />
       </Link>
       <h1 className="authform__title">{title}</h1>
-      <form className="authform__form">
+      <form className="authform__form" onSubmit={handleOnSubmit}>
         <div className="authform__inputs-container">
           {needName ? (
             <label className="authform__input-container">
               <span className="authform__input-name">Имя</span>
               <input
+                value={name}
+                onChange={handleOnChangeInputName}
                 type="text"
                 className="authform__input-value"
                 placeholder="Введите имя"
@@ -39,6 +66,8 @@ function AuthForm({
           <label className="authform__input-container">
             <span className="authform__input-name">E-mail</span>
             <input
+              value={email}
+              onChange={handleOnChangeInputEmail}
               type="text"
               className="authform__input-value"
               placeholder="Введите e-mail"
@@ -53,6 +82,8 @@ function AuthForm({
           <label className="authform__input-container">
             <span className="authform__input-name">Пароль</span>
             <input
+              value={password}
+              onChange={handleOnChangeInputPassword}
               type="password"
               className="authform__input-value"
               placeholder="Введите пароль"

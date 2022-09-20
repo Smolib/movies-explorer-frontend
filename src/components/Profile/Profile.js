@@ -1,6 +1,8 @@
 import "./Profile.css";
+import {mainApi} from '../../utils/MainApi'
 
-function Profile({ name, email }) {
+function Profile({ name, email, onExitButton }) {
+
   return (
     <section className="profile">
       <h1 className="profile__title">Привет, {name}!</h1>
@@ -31,7 +33,7 @@ function Profile({ name, email }) {
           <button className="profile__edit-button" type="button">
             Редактировать
           </button>
-          <button className="profile__exit-button" type="button">
+          <button className="profile__exit-button" type="button" onClick={onExitButton}>
             Выйти из аккаунта
           </button>
           {/* <span className="profile__warning-error">При обновлении профиля произошла ошибка.</span>

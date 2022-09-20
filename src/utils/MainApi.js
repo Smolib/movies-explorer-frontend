@@ -1,8 +1,7 @@
-class MainApi{
+class MainApi {
   constructor({ baseUrl, headers, credentials }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
-    this._creditials = credentials;
   }
 
   _checkResponse(res) {
@@ -16,7 +15,7 @@ class MainApi{
     return fetch(`${this._baseUrl}/signup`, {
       method: "POST",
       headers: this._headers,
-      credentials: this._credentials,
+      credentials: 'include',
       body: JSON.stringify({
         name: name,
         email: email,
@@ -29,7 +28,7 @@ class MainApi{
     return fetch(`${this._baseUrl}/signin`, {
       method: "POST",
       headers: this._headers,
-      credentials: this._credentials,
+      credentials: 'include',
       body: JSON.stringify({
         email: email,
         password: password,
@@ -41,7 +40,7 @@ class MainApi{
     return fetch(`${this._baseUrl}/signout`, {
       method: "POST",
       headers: this._headers,
-      credentials: this._credentials,
+      credentials: 'include',
     }).then(this._checkResponse);
   }
 
@@ -49,7 +48,7 @@ class MainApi{
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: this._headers,
-      credentials: this._credentials,
+      credentials: 'include',
     })
       .then(this._checkResponse)
       .then((result) => {
@@ -61,7 +60,7 @@ class MainApi{
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
-      credentials: this._credentials,
+      credentials: 'include',
       body: JSON.stringify({
         name: name,
         email: email,
@@ -73,7 +72,7 @@ class MainApi{
     return fetch(`${this._baseUrl}/movies`, {
       method: "GET",
       headers: this._headers,
-      credentials: this._credentials,
+      credentials: 'include',
     })
       .then(this._checkResponse)
       .then((result) => {
@@ -81,30 +80,29 @@ class MainApi{
       });
   }
 
-    postMovie(movie) {
-      return fetch(`${this._baseUrl}/movies`, {
-        method: "POST",
-        headers: this._headers,
-        credentials: this._credentials,
-        body: JSON.stringify(movie),
-      }).then(this._checkResponse);
-    }
+  postMovie(movie) {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: "POST",
+      headers: this._headers,
+      credentials: 'include',
+      body: JSON.stringify(movie),
+    }).then(this._checkResponse);
+  }
 
   deleteMovie(movieId) {
     return fetch(`${this._baseUrl}/movies/${movieId}`, {
       method: "DELETE",
       headers: this._headers,
-      credentials: this._credentials,
+      credentials: 'include',
     }).then(this._checkResponse);
   }
 }
 
 const mainApi = new MainApi({
-  baseUrl: "https://api.diploma.smolib.nomoredomains.sbs/",
+  baseUrl: "https://api.diploma.smolib.nomoredomains.sbs",
   headers: {
     "Content-Type": "application/json",
   },
-  credentials: "include",
 });
 
 export { mainApi };

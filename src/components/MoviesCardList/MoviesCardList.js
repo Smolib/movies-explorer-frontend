@@ -67,7 +67,6 @@ function MoviesCardList({
 
   return (
     <>
-      {console.log(countOfMovies)}
       <section className="movies-list">
         {isFirstSearch ? (
           <p className="movies-list__text">Здесь будут результаты поиска.</p>
