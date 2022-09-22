@@ -7,7 +7,7 @@ function MoviesCardList({
   movies,
   isMoviesLoaded,
   isFirstSearch,
-  needMoreButton,
+  needMoreButton
 }) {
   const [widthOfWindow, setWidthOfWindow] = useState(window.innerWidth);
   const handleResizeWindow = () => {
@@ -85,7 +85,7 @@ function MoviesCardList({
               );
             })
           ) : (
-            ""
+          <p className="movies-list__text">Фильмы не найдены.</p>
           )
         ) : (
           <Preloader />
