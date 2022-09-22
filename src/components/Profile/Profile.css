@@ -8,8 +8,6 @@
   height: auto;
 }
 
-
-
 @media screen and (max-width: 800px) {
   .profile {
     padding-top: 232px;
@@ -93,6 +91,10 @@
   line-height: 13px;
   color: black;
   opacity: 1;
+}
+
+.profile__input-value:disabled {
+  color: black;
 }
 
 .profile__error-validation {
@@ -200,12 +202,17 @@
 .profile__save-button:disabled {
   background-color: #f8f8f8;
   color: #c2c2c2;
-  cursor: none;
+  cursor: auto;
 }
 
 .profile__save-button:hover,
 .profile__save-button:focus {
   opacity: 0.8;
+}
+
+.profile__save-button:disabled:hover,
+.profile__save-button:disabled:focus {
+  opacity: 1;
 }
 
 @media screen and (max-width: 500px) {

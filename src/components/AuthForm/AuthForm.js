@@ -122,9 +122,9 @@ function AuthForm({
             <input
               value={email}
               onChange={handleOnChangeInputEmail}
-              type="email"
               className="authform__input-value"
               placeholder="Введите e-mail"
+              pattern="^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$"
               required
             />
             <span

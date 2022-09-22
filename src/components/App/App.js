@@ -17,7 +17,7 @@ import { mainApi } from "../../utils/MainApi";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({name: '', email: ''});
   const [savedMovies, setSavedMovies] = useState([]);
   const [isPopupMenuOpen, setIsPopupMenuOpen] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -140,6 +140,7 @@ function App() {
                 name={currentUser.name}
                 email={currentUser.email}
                 onExitButton={onExitButton}
+                isUserChecked={isUserChecked}
               />
             </ProtectedRoute>
             <Route path="*">
