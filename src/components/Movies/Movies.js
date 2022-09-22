@@ -21,14 +21,16 @@ function Movies() {
   }, [valueOfSearch, allMovies]);
 
   function handleSubmitSearch(keyWord) {
+    if(isFirstSearch) {
     setIsFirstSearch(false);
-    moviesApi
+      moviesApi
       .getMovies()
       .then((data) => {
         setAllMovies(data);
         setIsMoviesLoaded(true);
       })
       .then(() => setValueOfSearch({ ...valueOfSearch, keyWord: keyWord }));
+    } else {setValueOfSearch({ ...valueOfSearch, keyWord: keyWord })};
   }
 
   function handleCheckbox() {
