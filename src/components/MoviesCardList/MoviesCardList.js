@@ -1,14 +1,19 @@
 import "./MoviesCardList.css";
 import MovieCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { mainApi } from "../../utils/MainApi";
 
 function MoviesCardList({
   movies,
   isMoviesLoaded,
   isFirstSearch,
-  needMoreButton
+  needMoreButton,
+  savedButtonClass,
 }) {
+  const { savedMovies, setSavedMovies } = useContext(CurrentUserContext);
+
   const [widthOfWindow, setWidthOfWindow] = useState(window.innerWidth);
   const handleResizeWindow = () => {
     setWidthOfWindow(window.innerWidth);
@@ -65,6 +70,38 @@ function MoviesCardList({
     }
   };
 
+  const checkIsSaved = (movie) => {
+    const isSaved = savedMovies.some((item) => {
+      return item.movieId === movie.movieId;
+    });
+    return isSaved;
+  };
+
+  const handleOnClickMovieButton = (movie) => {
+    if (checkIsSaved(movie)) {
+      const savedMovie = savedMovies.find((item) => {
+        return item.movieId === movie.movieId;
+      });
+      mainApi
+        .deleteMovie(savedMovie)
+        .then(() =>
+          mainApi.getSavedMovies().then((data) => setSavedMovies(data))
+        )
+        .catch(() => {
+          alert("Упс, мы не смогли удалить фильм из сохраненных");
+        });
+    } else {
+      mainApi
+        .postMovie(movie)
+        .then((savedMovie) => setSavedMovies([...savedMovies, savedMovie]))
+        .catch(() => {
+          alert("Упс, мы не смогли добавить фильм в сохраненные");
+        });
+    }
+
+    return;
+  };
+
   return (
     <>
       <section className="movies-list">
@@ -75,17 +112,21 @@ function MoviesCardList({
             moviesForView.map((movie) => {
               return (
                 <MovieCard
-                  key={movie.id}
+                  key={movie.movieId}
                   title={movie.nameRU}
                   time={movie.duration}
-                  imageUrl={movie.image.url}
+                  imageUrl={movie.image}
                   trailerLink={movie.trailerLink}
-                  nameOfButton="saved"
+                  nameOfButton={
+                    checkIsSaved(movie) ? { savedButtonClass } : "save"
+                  }
+                  textOfButton={checkIsSaved(movie) ? "Удалить" : "Сохранить"}
+                  onClick={() => handleOnClickMovieButton(movie)}
                 />
               );
             })
           ) : (
-          <p className="movies-list__text">Фильмы не найдены.</p>
+            <p className="movies-list__text">Фильмы не найдены.</p>
           )
         ) : (
           <Preloader />

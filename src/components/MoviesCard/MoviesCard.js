@@ -7,6 +7,7 @@ function MoviesCard({
   trailerLink,
   nameOfButton,
   textOfButton,
+  onClick
 }) {
   const mins = time % 60;
   const hours = Math.trunc(time / 60);
@@ -24,13 +25,14 @@ function MoviesCard({
       >
         <img
           className="movie-card__image"
-          src={`https://api.nomoreparties.co${imageUrl}`}
+          src={imageUrl}
           alt={title}
         />
       </a>
       <button
         type="button"
         className={`movie-card__button movie-card__button_type_${nameOfButton}`}
+        onClick={onClick}
       >
         {textOfButton ? textOfButton : ""}
       </button>

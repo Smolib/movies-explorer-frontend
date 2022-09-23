@@ -17,7 +17,7 @@ import { mainApi } from "../../utils/MainApi";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({name: '', email: ''});
+  const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
   const [savedMovies, setSavedMovies] = useState([]);
   const [isPopupMenuOpen, setIsPopupMenuOpen] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -76,7 +76,9 @@ function App() {
       .catch(() => alert("Произошла ошибка, мы не смогли разлогиниться"));
   }
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider
+      value={{currentUser, setCurrentUser, savedMovies, setSavedMovies}}
+    >
       {isUserChecked ? (
         <>
           <Navigation
@@ -110,7 +112,7 @@ function App() {
                 onOpenMenu={onOpenMenu}
                 isUserChecked={isUserChecked}
               />
-              <Movies />
+              <Movies savedMovies={savedMovies} />
               <Footer />
             </ProtectedRoute>
             <ProtectedRoute
@@ -125,7 +127,7 @@ function App() {
                 onOpenMenu={onOpenMenu}
                 isUserChecked={isUserChecked}
               />
-              <SavedMovies />
+              <SavedMovies savedMovies={savedMovies} />
               <Footer />
             </ProtectedRoute>
             <ProtectedRoute exact path="/profile" loggedIn={isUserLoggedIn}>
