@@ -139,8 +139,6 @@ function App() {
                 isUserChecked={isUserChecked}
               />
               <Profile
-                name={currentUser.name}
-                email={currentUser.email}
                 onExitButton={onExitButton}
                 isUserChecked={isUserChecked}
               />

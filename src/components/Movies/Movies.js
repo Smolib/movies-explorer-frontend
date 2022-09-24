@@ -42,8 +42,8 @@ function Movies({ savedMovies }) {
           });
           setAllMovies(movies);
           setIsMoviesLoaded(true);
+          setValueOfSearch({ ...valueOfSearch, keyWord: keyWord });
         })
-        .then(() => setValueOfSearch({ ...valueOfSearch, keyWord: keyWord }));
     } else {
       setValueOfSearch({ ...valueOfSearch, keyWord: keyWord });
     }

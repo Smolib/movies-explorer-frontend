@@ -174,15 +174,21 @@
   }
 }
 
-.profile__warning-error {
+.profile__warning {
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
-  color: red;
-  margin-top: 14px;
   letter-spacing: 0.2px;
   margin: 10px;
   text-align: center;
+}
+
+.profile__warning_type_error {
+  color: red;
+}
+
+.profile__warning_type_success {
+  color: green;
 }
 
 .profile__save-button {

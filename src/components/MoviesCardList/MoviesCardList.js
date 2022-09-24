@@ -12,6 +12,7 @@ function MoviesCardList({
   needMoreButton,
   savedButtonClass,
 }) {
+
   const { savedMovies, setSavedMovies } = useContext(CurrentUserContext);
 
   const [widthOfWindow, setWidthOfWindow] = useState(window.innerWidth);
@@ -118,9 +119,9 @@ function MoviesCardList({
                   imageUrl={movie.image}
                   trailerLink={movie.trailerLink}
                   nameOfButton={
-                    checkIsSaved(movie) ? { savedButtonClass } : "save"
+                    checkIsSaved(movie) ? savedButtonClass : "save"
                   }
-                  textOfButton={checkIsSaved(movie) ? "Удалить" : "Сохранить"}
+                  textOfButton={checkIsSaved(movie) ? "" : "Сохранить"}
                   onClick={() => handleOnClickMovieButton(movie)}
                 />
               );

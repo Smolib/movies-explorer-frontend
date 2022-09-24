@@ -1,8 +1,11 @@
 import "./Profile.css";
 import { mainApi } from "../../utils/MainApi";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Profile({ name, email, onExitButton, isUserChecked }) {
+function Profile({ onExitButton }) {
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+
   const [switchForEdit, setSwitchForEdit] = useState(false);
   const [nameOfUser, setNameOfUser] = useState("");
   const [emailOfUser, setEmailOfUser] = useState("");
@@ -20,11 +23,12 @@ function Profile({ name, email, onExitButton, isUserChecked }) {
   const [isUserUseInputEmail, setIsUserUseInputEmail] = useState(false);
   const [canSubmit, setCanSubmit] = useState(true);
   const [errorUpdate, setErrorUpdate] = useState(false);
+  const [successUpdate, setSuccessUpdate] = useState(false);
 
   useEffect(() => {
-    setNameOfUser(name ? name : "");
-    setEmailOfUser(email ? email : "");
-  }, [name, email]);
+    setNameOfUser(currentUser.name ? currentUser.name : "");
+    setEmailOfUser(currentUser.email ? currentUser.email : "");
+  }, [currentUser.name, currentUser.email]);
 
   useEffect(() => {
     setCanSubmit(errorInputName.isValid && errorInputEmail.isValid);
@@ -55,16 +59,23 @@ function Profile({ name, email, onExitButton, isUserChecked }) {
     e.preventDefault();
     mainApi
       .patchUserInfo({ name: nameOfUser, email: emailOfUser })
+      .then((data) => {
+        setCurrentUser({ name: data.name, email: data.email });
+      })
       .then(() => {
         setSwitchForEdit(false);
         setErrorUpdate(false);
+        setSuccessUpdate(true);
       })
-      .catch(() => setErrorUpdate(true));
+      .catch(() => {
+        setErrorUpdate(true);
+        setSuccessUpdate(false);
+      });
   }
 
   return (
     <section className="profile">
-      <h1 className="profile__title">Привет, {name}!</h1>
+      <h1 className="profile__title">Привет, {currentUser.name}!</h1>
       <form className="profile__form" onSubmit={handleSaveButton}>
         <label className="profile__input-container">
           <span className="profile__input-name">Имя</span>
@@ -76,7 +87,7 @@ function Profile({ name, email, onExitButton, isUserChecked }) {
             max="30"
             pattern="^[\\sa-zA-Zа-яА-ЯёЁ-]+$"
             className="profile__input-value"
-            placeholder={name}
+            placeholder={currentUser.name}
             disabled={!switchForEdit}
             required
           />
@@ -98,7 +109,7 @@ function Profile({ name, email, onExitButton, isUserChecked }) {
             onChange={handleOnChangeInputEmail}
             pattern="^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$"
             className="profile__input-value"
-            placeholder={email}
+            placeholder={currentUser.email}
             disabled={!switchForEdit}
             required
           />
@@ -116,6 +127,13 @@ function Profile({ name, email, onExitButton, isUserChecked }) {
         <div className="profile__button-container">
           {!switchForEdit ? (
             <>
+              {successUpdate ? (
+                <span className="profile__warning profile__warning_type_success">
+                  Профиль обновлен успешно.
+                </span>
+              ) : (
+                ""
+              )}
               <button
                 className="profile__edit-button"
                 type="button"
@@ -137,7 +155,7 @@ function Profile({ name, email, onExitButton, isUserChecked }) {
           {switchForEdit ? (
             <>
               {errorUpdate ? (
-                <span className="profile__warning-error">
+                <span className="profile__warning profile__warning_type_error">
                   При обновлении профиля произошла ошибка.
                 </span>
               ) : (
