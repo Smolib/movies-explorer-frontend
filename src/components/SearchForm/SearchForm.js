@@ -2,8 +2,8 @@ import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useState } from "react";
 
-function SearchForm({ handleSubmitSearch, handleCheckbox }) {
-  const [keyWord, setKeyWord] = useState("");
+function SearchForm({ handleSubmitSearch, handleCheckbox, isShort=false, searchString="" }) {
+  const [keyWord, setKeyWord] = useState(searchString);
 
   function handleOnChangeInputKeyWord(e) {
     setKeyWord(e.target.value);
@@ -39,7 +39,7 @@ function SearchForm({ handleSubmitSearch, handleCheckbox }) {
             </button>
           </form>
         </div>
-        <FilterCheckbox handleCheckbox={handleCheckbox} />
+        <FilterCheckbox handleCheckbox={handleCheckbox} isShort={isShort} />
       </div>
     </section>
   );

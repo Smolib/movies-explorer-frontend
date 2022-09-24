@@ -5,52 +5,66 @@ import { moviesApi } from "../../utils/MoviesApi";
 import { searchMovies } from "../../utils/search";
 
 function Movies({ savedMovies }) {
+  const _isShort =
+    localStorage.getItem("moviesSearchIsShort") === "true" || false;
+  const _keyWord = localStorage.getItem("moviesSearchKeyWord") || "";
+  const _hadSearch = localStorage.getItem("moviesSearchKeyWord") !== null;
+
   const [allMovies, setAllMovies] = useState([]);
   const [movies, setMovies] = useState([]);
   const [isMoviesLoaded, setIsMoviesLoaded] = useState(false);
   const [valueOfSearch, setValueOfSearch] = useState({
-    keyWord: "",
-    isShort: false,
+    keyWord: _keyWord,
+    isShort: _isShort,
   });
-  const [isFirstSearch, setIsFirstSearch] = useState(true);
+  const [isFirstSearch, setIsFirstSearch] = useState(!_hadSearch);
+
   useEffect(() => {
-    if (!isFirstSearch) {
-      setMovies(searchMovies(allMovies, valueOfSearch));
+    if (_hadSearch) {
+      loadMovies();
     }
+  }, []);
+
+  useEffect(() => {
+    setMovies(searchMovies(allMovies, valueOfSearch));
   }, [valueOfSearch, allMovies]);
 
-  function handleSubmitSearch(keyWord) {
-    if (isFirstSearch) {
-      setIsFirstSearch(false);
-      moviesApi
-        .getMovies()
-        .then((data) => {
-          const movies = data.map((movie) => {
-            return {
-              country: movie.country,
-              director: movie.director,
-              duration: movie.duration,
-              year: movie.year,
-              description: movie.description,
-              image: `https://api.nomoreparties.co${movie.image.url}`,
-              trailerLink: movie.trailerLink,
-              thumbnail: `https://api.nomoreparties.co${movie.image.url}`,
-              movieId: movie.id,
-              nameRU: movie.nameRU,
-              nameEN: movie.nameEN,
-            };
-          });
-          setAllMovies(movies);
-          setIsMoviesLoaded(true);
-          setValueOfSearch({ ...valueOfSearch, keyWord: keyWord });
-        })
-    } else {
-      setValueOfSearch({ ...valueOfSearch, keyWord: keyWord });
-    }
+  function loadMovies() {
+    if (isMoviesLoaded) return;
+
+    moviesApi.getMovies().then((data) => {
+      const movies = data.map((movie) => {
+        return {
+          country: movie.country,
+          director: movie.director,
+          duration: movie.duration,
+          year: movie.year,
+          description: movie.description,
+          image: `https://api.nomoreparties.co${movie.image.url}`,
+          trailerLink: movie.trailerLink,
+          thumbnail: `https://api.nomoreparties.co${movie.image.url}`,
+          movieId: movie.id,
+          nameRU: movie.nameRU,
+          nameEN: movie.nameEN,
+        };
+      });
+      setAllMovies(movies);
+      setIsMoviesLoaded(true);
+    });
   }
 
-  function handleCheckbox() {
-    setValueOfSearch({ ...valueOfSearch, isShort: !valueOfSearch.isShort });
+  function handleSubmitSearch(keyWord) {
+    setIsFirstSearch(false);
+
+    loadMovies();
+    localStorage.setItem("moviesSearchKeyWord", keyWord);
+    setValueOfSearch({ ...valueOfSearch, keyWord: keyWord });
+  }
+
+  function handleCheckbox(checked) {
+    localStorage.setItem("moviesSearchIsShort", `${checked}`);
+    console.log("moviesSearchIsShort <=", checked);
+    setValueOfSearch({ ...valueOfSearch, isShort: checked });
   }
 
   return (
@@ -58,6 +72,8 @@ function Movies({ savedMovies }) {
       <SearchForm
         handleSubmitSearch={handleSubmitSearch}
         handleCheckbox={handleCheckbox}
+        isShort={valueOfSearch.isShort}
+        searchString={valueOfSearch.keyWord}
       />
       <MoviesCardList
         movies={movies}

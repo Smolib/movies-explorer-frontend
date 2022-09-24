@@ -85,7 +85,7 @@ function Profile({ onExitButton }) {
             type="text"
             min="2"
             max="30"
-            pattern="^[\\sa-zA-Zа-яА-ЯёЁ-]+$"
+            pattern="^[\\sa-zA-Zа-яА-ЯёЁ-]+$\gi"
             className="profile__input-value"
             placeholder={currentUser.name}
             disabled={!switchForEdit}
