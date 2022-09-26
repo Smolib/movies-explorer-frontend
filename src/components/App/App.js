@@ -21,6 +21,7 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [isPopupMenuOpen, setIsPopupMenuOpen] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [isSavedMoviesLoaded, setIsSavedMoviesLoaded] = useState(false);
   const [isUserChecked, setIsUserChecked] = useState(false);
   function onOpenMenu() {
     setIsPopupMenuOpen(true);
@@ -56,6 +57,7 @@ function App() {
           setCurrentUser(user);
           setSavedMovies(savedMovies);
         })
+        .then(() => setIsSavedMoviesLoaded(true))
         .catch((err) => {
           alert(
             "Ой! Что-то пошло не так! Movies сломался и мы не смогли подгрузить данные пользователя и сохраненные фильмы, простите нас! :("
@@ -71,13 +73,14 @@ function App() {
       .then(() => {
         setCurrentUser({});
         setSavedMovies([]);
+        localStorage.clear();
         setIsUserLoggedIn(false);
       })
       .catch(() => alert("Произошла ошибка, мы не смогли разлогиниться"));
   }
   return (
     <CurrentUserContext.Provider
-      value={{currentUser, setCurrentUser, savedMovies, setSavedMovies}}
+      value={{ currentUser, setCurrentUser, savedMovies, setSavedMovies }}
     >
       {isUserChecked ? (
         <>
@@ -112,7 +115,7 @@ function App() {
                 onOpenMenu={onOpenMenu}
                 isUserChecked={isUserChecked}
               />
-              <Movies savedMovies={savedMovies} />
+              <Movies />
               <Footer />
             </ProtectedRoute>
             <ProtectedRoute
@@ -127,7 +130,7 @@ function App() {
                 onOpenMenu={onOpenMenu}
                 isUserChecked={isUserChecked}
               />
-              <SavedMovies savedMovies={savedMovies} />
+              <SavedMovies isSavedMoviesLoaded={isSavedMoviesLoaded}/>
               <Footer />
             </ProtectedRoute>
             <ProtectedRoute exact path="/profile" loggedIn={isUserLoggedIn}>

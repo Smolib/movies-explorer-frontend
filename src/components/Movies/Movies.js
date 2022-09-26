@@ -1,10 +1,14 @@
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { moviesApi } from "../../utils/MoviesApi";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { searchMovies } from "../../utils/search";
 
-function Movies({ savedMovies }) {
+function Movies() {
+  
+  const { savedMovies } = useContext(CurrentUserContext);
+
   const _isShort =
     localStorage.getItem("moviesSearchIsShort") === "true" || false;
   const _keyWord = localStorage.getItem("moviesSearchKeyWord") || "";
@@ -63,7 +67,6 @@ function Movies({ savedMovies }) {
 
   function handleCheckbox(checked) {
     localStorage.setItem("moviesSearchIsShort", `${checked}`);
-    console.log("moviesSearchIsShort <=", checked);
     setValueOfSearch({ ...valueOfSearch, isShort: checked });
   }
 

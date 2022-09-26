@@ -1,13 +1,18 @@
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { searchMovies } from "../../utils/search";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function SavedMovies({ savedMovies }) {
+function SavedMovies({isSavedMoviesLoaded}) {
+
+  const { savedMovies } = useContext(CurrentUserContext);
+
   const _isShort =
     localStorage.getItem("savedMoviesSearchIsShort") === "true" || false;
   const _keyWord = localStorage.getItem("savedMoviesSearchKeyWord") || "";
 
+  const [isMoviesLoaded, setIsMoviesLoaded] = useState(false);
   const [movies, setMovies] = useState([]);
   const [valueOfSearch, setValueOfSearch] = useState({
     keyWord: _keyWord,
@@ -15,7 +20,10 @@ function SavedMovies({ savedMovies }) {
   });
 
   useEffect(() => {
-    setMovies(searchMovies(savedMovies, valueOfSearch));
+    if(isSavedMoviesLoaded) {
+      setMovies(searchMovies(savedMovies, valueOfSearch));
+      setIsMoviesLoaded(true)
+    }
   }, [valueOfSearch, savedMovies]);
 
   function handleSubmitSearch(keyWord) {
@@ -38,7 +46,7 @@ function SavedMovies({ savedMovies }) {
       />
       <MoviesCardList
         movies={movies}
-        isMoviesLoaded={true}
+        isMoviesLoaded={isMoviesLoaded}
         isFirstSearch={false}
         needMoreButton={false}
         savedButtonClass="delete"
