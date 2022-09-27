@@ -5,7 +5,7 @@ import Profile from "../Profile/Profile";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import links from "../../data/links";
 import Navigation from "../Navigation/Navigation";
 import NoMatch from "../NoMatch/NoMatch";
@@ -102,10 +102,18 @@ function App() {
               <Footer />
             </Route>
             <Route path="/signin">
-              <Register loggedInStatus={loggedInStatus} />
+              {isUserLoggedIn ? (
+              <Redirect to="./" />
+              ) : (
+                <Register loggedInStatus={loggedInStatus} />
+              )}
             </Route>
             <Route path="/signup">
-              <Login loggedInStatus={loggedInStatus} />
+              {isUserLoggedIn ? (
+               <Redirect to="./" />
+              ) : (
+                <Login loggedInStatus={loggedInStatus} />
+              )}
             </Route>
             <ProtectedRoute exact path="/movies" loggedIn={isUserLoggedIn}>
               <Header
@@ -130,7 +138,7 @@ function App() {
                 onOpenMenu={onOpenMenu}
                 isUserChecked={isUserChecked}
               />
-              <SavedMovies isSavedMoviesLoaded={isSavedMoviesLoaded}/>
+              <SavedMovies isSavedMoviesLoaded={isSavedMoviesLoaded} />
               <Footer />
             </ProtectedRoute>
             <ProtectedRoute exact path="/profile" loggedIn={isUserLoggedIn}>

@@ -8,15 +8,11 @@ function SavedMovies({isSavedMoviesLoaded}) {
 
   const { savedMovies } = useContext(CurrentUserContext);
 
-  const _isShort =
-    localStorage.getItem("savedMoviesSearchIsShort") === "true" || false;
-  const _keyWord = localStorage.getItem("savedMoviesSearchKeyWord") || "";
-
   const [isMoviesLoaded, setIsMoviesLoaded] = useState(false);
   const [movies, setMovies] = useState([]);
   const [valueOfSearch, setValueOfSearch] = useState({
-    keyWord: _keyWord,
-    isShort: _isShort,
+    keyWord: '',
+    isShort: false,
   });
 
   useEffect(() => {
@@ -27,12 +23,10 @@ function SavedMovies({isSavedMoviesLoaded}) {
   }, [valueOfSearch, savedMovies]);
 
   function handleSubmitSearch(keyWord) {
-    localStorage.setItem("savedMoviesSearchKeyWord", keyWord);
     setValueOfSearch({ ...valueOfSearch, keyWord: keyWord });
   }
 
   function handleCheckbox(checked) {
-    localStorage.setItem("savedMoviesSearchIsShort", `${checked}`);
     setValueOfSearch({ ...valueOfSearch, isShort: checked });
   }
 

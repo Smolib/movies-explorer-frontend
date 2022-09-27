@@ -31,8 +31,12 @@ function Profile({ onExitButton }) {
   }, [currentUser.name, currentUser.email]);
 
   useEffect(() => {
-    setCanSubmit(errorInputName.isValid && errorInputEmail.isValid);
-  }, [errorInputName, errorInputEmail]);
+    setCanSubmit(
+      errorInputName.isValid &&
+        errorInputEmail.isValid &&
+        (nameOfUser !== currentUser.name || emailOfUser !== currentUser.email)
+    );
+  }, [errorInputName, errorInputEmail, nameOfUser, emailOfUser, currentUser]);
 
   function handleOnChangeInputName(e) {
     setNameOfUser(e.target.value);

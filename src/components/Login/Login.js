@@ -14,7 +14,7 @@ function Login({ loggedInStatus }) {
         history.push("/movies");
       })
       .catch(() => {
-        alert("К сожалению, во время регистрации произошла ошибка");
+        alert("К сожалению, во время авторизации произошла ошибка");
       });
   }
   const props = {
