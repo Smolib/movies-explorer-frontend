@@ -38,7 +38,6 @@
 }
 
 .movie-card__image {
-  grid-column: span 2;
   max-width: 360px;
   width: 100%;
   max-height: 200px;
@@ -49,6 +48,11 @@
   .movie-card__image {
     margin: 15px auto;
   }
+}
+
+.movie-card__trailer-link {
+
+  grid-column: span 2;
 }
 
 .movie-card__button {

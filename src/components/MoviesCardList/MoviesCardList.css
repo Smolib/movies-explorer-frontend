@@ -23,6 +23,13 @@
   }
 }
 
+.movies-list__text {
+  text-align: center;
+  margin: 0;
+  grid-column-start: 1;
+  grid-column-end: -1;
+}
+
 .movies-list__more-container {
   grid-column-start: 1;
   grid-column-end: -1;
