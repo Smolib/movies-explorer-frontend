@@ -1,18 +1,42 @@
 import "./MoviesCard.css";
 
-function MoviesCard({ title, time, image, nameOfButton, textOfButton }) {
+function MoviesCard({
+  title,
+  time,
+  imageUrl,
+  trailerLink,
+  nameOfButton,
+  textOfButton,
+  onClick
+}) {
+  const mins = time % 60;
+  const hours = Math.trunc(time / 60);
   return (
-    <arcticle className="movie-card">
+    <article className="movie-card">
       <h2 className="movie-card__name">{title}</h2>
-      <span className="movie-card__time">{time}</span>
-      <img className="movie-card__image" src={image} alt={title} />
+      <span className="movie-card__time">{`${
+        hours ? `${hours} ч. ` : ""
+      }${mins} мин.`}</span>
+      <a
+        className="movie-card__trailer-link"
+        href={trailerLink}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          className="movie-card__image"
+          src={imageUrl}
+          alt={title}
+        />
+      </a>
       <button
         type="button"
         className={`movie-card__button movie-card__button_type_${nameOfButton}`}
+        onClick={onClick}
       >
         {textOfButton ? textOfButton : ""}
       </button>
-    </arcticle>
+    </article>
   );
 }
 
